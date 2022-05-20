@@ -1,0 +1,312 @@
+package hotel;
+import java.util.Scanner;
+public class Hotel {
+    public static void main(String[] args) {
+      
+        Scanner enter=new Scanner(System.in);
+        boolean loop = true ; // to Loop Program
+        // Makes Arrays :-
+        String[] col_1 = new String[10];     // to can print all Rooms
+        String[] col_2 = new String[10];
+        String[] col_3 = new String[10];
+        String[] col_4 = new String[10];
+        int currentSize = 0;
+//        int index = -1 ; 
+// to work Program
+        //------ Specific Numbers of Rooms ------
+            for(int i = 0, j = 1; i < 10 && j <= 37; i++, j+=4)
+                col_1[i] = "[   "+Integer.toString(j)+"   ]" ;
+            for(int i = 0, j = 2; i < 10 && j <= 38; i++, j+=4)
+                col_2[i] = "[   "+Integer.toString(j)+"   ]" ;
+            for(int i = 0, j = 3; i < 10 && j <= 39; i++, j+=4)
+                col_3[i] = "[   "+Integer.toString(j)+"   ]" ;
+            for(int i = 0, j = 4; i < 10 && j <= 40; i++, j+=4)
+                col_4[i] = "[   "+Integer.toString(j)+"   ]" ;
+        //-------- To Check ------
+        col_1[0] = "Reserved" ;
+        col_2[0] = "Reserved" ;
+        col_3[0] = "Reserved" ;
+        col_4[0] = "Reserved" ;
+        col_1[1] = "Reserved" ;
+        col_2[5] = "Reserved" ;
+        col_3[5] = "Reserved" ;
+        col_4[7] = "Reserved" ;
+        //------------------------------------------------------
+        // New Array Justtt To Get Index 
+        int[] Ncol_1 = new int[10]; // to can print all Rooms
+        int[] Ncol_2 = new int[10];
+        int[] Ncol_3 = new int[10];
+        int[] Ncol_4 = new int[10];
+        for(int k = 0, n = 1; k < 10 && n <= 37; k++, n+=4)
+            Ncol_1[k] = n ;
+        for(int k = 0, n= 2; k < 10 && n <= 38; k++, n+=4)
+            Ncol_2[k] = n ;
+        for(int k = 0, n = 3; k < 10 && n <= 39; k++, n+=4)
+            Ncol_3[k] = n ;
+        for(int k = 0, n = 4; k < 10 && n <= 40; k++, n+=4)
+            Ncol_4[k] = n ;
+       
+// ---------------------------------- Show Menu To User ----------------------------------------------------------
+        while(loop){
+        System.out.println("***************** Main Menu *****************") ;
+        System.out.println("[1] Disply number of available rooms.");
+        System.out.println("[2] Disply room status for all rooms.");
+        System.out.println("[3] Reserve room(s).");
+        System.out.println("[4] Delete reservation(s)");
+        System.out.println("[5] Exit.");   
+        System.out.print("Enter Your Choice: ");
+        int choice = enter.nextInt();
+        System.out.println();
+    //===============
+int N_Room = 0 ;
+// ---------------------------------- How The Program Works --------------------------------------------------------
+    switch(choice){
+            case 1 :
+                for (int j = 0; j < 10; j ++){
+                    if(col_1[j].equals("Reserved"))
+                        currentSize += 1 ;
+                    if(col_2[j].equals("Reserved"))
+                        currentSize += 1 ;
+                    if(col_3[j].equals("Reserved"))
+                        currentSize += 1 ;
+                    if(col_4[j].equals("Reserved"))
+                        currentSize += 1 ;
+                }
+                System.out.println("Number of Available Rooms: "+(40 - currentSize));break;
+        //===============
+            case 2 :
+                int i = 0 ;
+                for (i = 0; i < 10; i ++){
+                    System.out.println(col_1[i]+"     "+"     "+col_2[i]+"     "+col_3[i]+"     "+col_4[i]);     
+                }
+                System.out.println();
+                break;
+        //===============
+                case 3:
+                // Print all Arrays
+                for (i = 0; i < 10; i ++){
+                    System.out.println("   "+col_1[i]+"   "+"   "+col_2[i]+"   "+col_3[i]+"   "+col_4[i]);
+                }
+            //-----------------------------------------
+                // Check if Exist Reserved Rooms
+                System.out.println("\n");
+                boolean IfExist = search_Exist_Room(col_1,col_2,col_3,col_4);
+            //-----------------------------------------
+                // Choose if Reserve Siut or Room
+                int R_choice = 0 ;
+                if(IfExist){
+                    System.out.println("[1] Reserve Room");
+                    System.out.println("[2] Reserve Suit");
+                    System.out.println();
+                    System.out.print("What's Your Choice: ");
+                    R_choice = enter.nextInt();
+                    System.out.println();
+                }
+                else
+                    System.out.println("Sorry, there are no available rooms.");
+            //-----------------------------------------
+                // To Check if Exist Reserved Suit or Not
+                boolean check_Reserved = false ;
+                int N_suit = 0 ;
+                int n_Re_Suits = 0 ; // Number of Reserved Suits 
+                if(R_choice == 2){
+                    // To Check if Exist Reserved Suit or Not
+                    for(int j=0 ; j<10 ; j++){
+                        if(col_1[j].equals("Reserved")&&col_2[j].equals("Reserved")&&col_3[j].equals("Reserved")&&col_4[j].equals("Reserved"))
+                            n_Re_Suits += 1 ;
+                    }
+                    if(n_Re_Suits == 10)
+                        System.out.println("Error: No available suits");
+                    // ---------- Reserved available suits ----------
+                    else{
+                        check_Reserved = true ;
+                        while(check_Reserved){
+                            System.out.println("Please Choose The Suit Which To Reserve[From 1 To 10]: ");
+                            N_suit = enter.nextInt();
+                            // Chech if Required suite reserved or Not
+                            if(!(col_1[N_suit - 1].equals("Reserved")&&col_2[N_suit - 1].equals("Reserved")&&col_3[N_suit - 1].equals("Reserved")&&col_4[N_suit - 1].equals("Reserved"))){
+                                // To Reserved Suits 
+                                col_1[N_suit - 1] = "[Reserved]" ;
+                                col_2[N_suit - 1] = "[Reserved]" ;
+                                col_3[N_suit - 1] = "[Reserved]" ;
+                                col_4[N_suit- 1] = "[Reserved]" ;
+                                check_Reserved = false ;
+                                
+                            }
+                            else{
+                                System.out.println("Error: This suite is already reserved");
+                                check_Reserved= true ;
+                            }   
+                        }
+                    if(!check_Reserved)
+                        System.out.println("Required suite successfully reserved");
+                    }
+                }
+                // ***************** To Reserved Room******************
+            
+            if(R_choice == 1){  
+                // To Check if Exist Reserved Room or Not
+                if(search_Exist_Room(col_1,col_2,col_3,col_4)){
+                    //System.out.println("Not Avihiable Rooms reservation To cancel");
+                    System.out.print("Please Choose The Suit Which To Reserve[From 1 To 40]: ");
+                    N_Room = enter.nextInt(); //13 but it index = 3
+                    int goal_index = 0;
+                    for(int a =0 ; a<10 ; a++){
+                        if(Ncol_1[a] == N_Room){ // research about N_suit in New Array
+                            goal_index = a  ;
+                            if(!col_1[goal_index].equals("Reserved")){
+                                col_1[goal_index] = "Reserved" ;
+                            System.out.println("This Room is Reserved Successfully");
+                            }
+                        }
+                        else if(Ncol_2[a] == N_Room){ 
+                            goal_index = a  ;
+                            if(!col_2[goal_index].equals("Reserved")){
+                                col_2[goal_index] = "Reserved" ;
+                            System.out.println("This Room is Reserved Successfully");
+                            }
+                        }
+                        else if(Ncol_3[a] == N_Room) {
+                            goal_index = a  ;
+                            if(!col_3[goal_index].equals("Reserved")){
+                                col_3[goal_index] = "Reserved" ;
+                                System.out.println("This Room is Reserved Successfully");
+                            }
+                        }
+                        else if(Ncol_4[a] == N_Room){ 
+                            goal_index = a  ;
+                            if(!col_4[goal_index].equals("Reserved")){
+                                col_4[goal_index] = "Reserved" ;
+                                System.out.println("This Room is Reserved Successfully");
+                            }
+                        }
+                        
+                }
+            }
+            else
+                System.out.println("There is No reservation Rooms To Reserved") ;
+                   
+                            
+            }break;
+        //===============
+            case 4:
+                         // Print all Arrays
+                for (i = 0; i < 10; i ++){
+                    System.out.println("   "+col_1[i]+"   "+"   "+col_2[i]+"   "+col_3[i]+"   "+col_4[i]);
+                }
+            //-----------------------------------------
+                // Check if Exist Reserved Rooms
+                System.out.println("\n");
+                boolean If_Exist = search_Exist_Room(col_1,col_2,col_3,col_4);
+            //-----------------------------------------
+                // Choose if Reserve Siut or Room
+                int C_choice = 0 ;
+                if(If_Exist){
+                    System.out.println("[1] cancel Room reservation");
+                    System.out.println("[2] cancel Suite reservation");
+                    System.out.println();
+                    System.out.print("What's Your Choice: ");
+                    C_choice = enter.nextInt();
+                    System.out.println();
+                }
+                else
+                    System.out.println("Sorry, there are no available reservation rooms.");
+            //-----------------------------------------
+                // To Check if Exist Reserved Suit or Not
+                int n_suit = 0 ;
+                int n_C_Suits = 0 ; // Number of Cancelled Suits 
+                if(C_choice == 2){
+                    // To Check if Exist Reserved Suit or Not
+                    for(int j=0 ; j<10 ; j++){
+                        if(!(col_1[j].equals("Reserved")&&col_2[j].equals("Reserved")&&col_3[j].equals("Reserved")&&col_4[j].equals("Reserved")))
+                            n_C_Suits += 1 ;
+                    }
+                    if(n_C_Suits == 10)
+                        System.out.println("Error: No available suits To Canceled(All Not Reserved)");
+                    // ---------- Reserved available suits ----------
+                    else{
+                        System.out.println("Please Choose The Suit Which To Cancel It[From 1 To 10]: ");
+                        n_suit = enter.nextInt();
+                        // Chech if Required suite Is Not reserved or Not
+                        if(col_1[n_suit - 1].equals("[Reserved]")&&col_2[n_suit - 1].equals("[Reserved]")&&col_3[n_suit - 1].equals("[Reserved]")&&col_4[n_suit - 1].equals("[Reserved]")){
+                           // To Cancel Suits 
+                            int start = (n_suit+3)+(3*(n_suit-2)) ;
+                            col_1[n_suit - 1] = "[   "+Integer.toString(start)+"   ]" ; 
+                            col_2[n_suit - 1] = "[   "+Integer.toString(start+1)+"   ]" ; ;
+                            col_3[n_suit - 1] = "[   "+Integer.toString(start+2)+"   ]" ;
+                            col_4[n_suit- 1] = "[   "+Integer.toString(start+3)+"   ]" ;
+                            System.out.println("Required suite successfully Canceled");
+                                
+                        }
+                        else
+                            System.out.println("Error: This suite is Already Not reserved");  
+                    }
+
+            }
+            
+            // ***************** To Canceled Room******************
+            N_Room = 0 ;
+            if(C_choice == 1){  
+                // To Check if Exist Reserved Room or Not
+                if(search_Exist_Room(col_1,col_2,col_3,col_4)){
+                    //System.out.println("Not Avihiable Rooms reservation To cancel");
+                    System.out.print("Please Choose The Suit Which To Cancel[From 1 To 40]: ");
+                    N_Room = enter.nextInt(); //13 but it index = 3
+                    int goal_index = 0;
+                    for(int a =0 ; a<10 ; a++){
+                        if(Ncol_1[a] == N_Room){ // research about N_suit in New Array
+                            goal_index = a ;
+                            if(col_1[goal_index].equals("Reserved")){
+                            col_1[goal_index] = "[   "+Integer.toString(N_Room)+"   ]" ;
+                            System.out.println("This Room is Canceled Successfully");
+                            }
+                        }
+                        else if(Ncol_2[a] == N_Room){ 
+                            goal_index = a ;
+                            if(col_2[goal_index].equals("Reserved")){
+                            col_2[goal_index] = "[   "+Integer.toString(N_Room)+"   ]" ;
+                            System.out.println("This Room is Canceled Successfully");
+                            }
+                        }
+                        else if(Ncol_3[a] == N_Room) {
+                            goal_index = a ;
+                            if(col_3[goal_index].equals("Reserved")){
+                                col_3[goal_index] = "[   "+Integer.toString(N_Room)+"   ]" ;
+                                System.out.println("This Room is Canceled Successfully");
+                            }
+                        }
+                        else if(Ncol_4[a] == N_Room){ 
+                            goal_index = a ;
+                            if(col_4[goal_index].equals("Reserved")){
+                                col_4[goal_index] = "[   "+Integer.toString(N_Room)+"   ]" ;
+                                System.out.println("This Room is Canceled Successfully");
+                            }
+                        }
+                        
+                }
+            }
+            else
+                System.out.println("There is No reservation Rooms To Cancel") ;
+                
+                            
+            }break;
+        //===============
+            case 5:
+                loop = false ;
+                break ;
+    }    
+                }
+    }
+        // My Method :-
+//==============================================================================
+    public static boolean search_Exist_Room(String[] col_1,String[] col_2,String[] col_3,String[] col_4){
+        int[] nums = {0,1,2,3,4,5,6,7,8,9};
+	for(int i: nums){
+            if(col_1[i].equals("Reserved")||col_2[i].equals("Reserved")||col_3[i].equals("Reserved")||col_4[i].equals("Reserved"))
+		return true;
+	}
+	return false;
+    }
+    
+    
+}
