@@ -1,0 +1,466 @@
+package finalproject;
+//@author Eng_Ola
+
+import java.io.*;
+import java.util.Scanner;
+
+public class LinkedList {
+
+    private class Node {
+
+        String StuFName;
+        String StuLastName;
+        String Stuspecialty;
+        String StuAddress;
+        int Stuid;
+        int StuLevel;
+        int StuAge;
+        double StuAvg;
+        String Uinvesity ;
+        Node next;
+    }
+    Node head;
+
+    public LinkedList append(LinkedList list, String fname, String Lname, String specialty,
+            String add, int id, int level, int age, double avg , String university) {
+        // add data new in last ..
+        Node newnode = new Node();  // 1- create Node ==data+next  
+        newnode.StuFName = fname;
+        newnode.StuLastName = Lname;
+        newnode.Stuspecialty = specialty;
+        newnode.StuAddress = add;
+        newnode.Stuid = id;
+        newnode.StuLevel = level;
+        newnode.StuAge = age;
+        newnode.StuAvg = avg;
+         newnode.Uinvesity=university;
+        if (list.head == null) {   //printer = بدلالة=head
+            list.head = newnode;
+        } else {
+
+            Node last = list.head;
+            while (last.next != null) {
+                last = last.next;  //  2- printer .end last.. 
+            }
+            last.next = newnode;
+        }
+        return list;
+    }
+
+    public void travers_show(LinkedList list) {
+        Node ptr = list.head;  // بدلالة الهيد   مؤشر 
+        System.out.println("LinkedList: ");
+        // Traverse through the LinkedList 
+        int counter1 = 0;
+        while (ptr != null) {
+          
+
+            System.out.println(ptr.StuFName + "*** " + ptr.StuLastName + "*** " + ptr.Stuspecialty + "***  " + ptr.StuAddress
+                    + "*** " + ptr.Stuid + "*** " + ptr.StuLevel + "*** " + ptr.StuAge + "*** " + ptr.StuAvg);
+            counter1 = 1;
+
+            // Go to next node 
+            ptr = ptr.next;   //   تعني  )i++(
+        }
+    }
+
+    public void travers_Report1(LinkedList list) {
+        Node curr = list.head;  // بدلالة الهيد   مؤشر 
+        System.out.println("LinkedList: ");
+        // Traverse through the LinkedList 
+        int counter2 = 0;
+        while (curr != null) {
+            if (curr.StuAddress=="Dear- Albalah") {
+                System.out.println(curr.StuFName + "*** " + curr.StuLastName + "*** " + curr.Stuspecialty + "*** " + curr.StuAddress
+                        + "*** " + curr.Stuid + "*** " + curr.StuLevel + "*** " + curr.StuAge + "*** " + curr.StuAvg +curr.Uinvesity);
+            }
+            counter2= 1;
+
+//           
+//                 System.out.println(curr.StuName + " " + curr.StuSpecf + " " + curr.StuAddress
+//                      + " " + curr.Stuid + " " + curr.StuLevel + " " + curr.StuAge + " " + curr.StuAvg);
+//              
+            // Go to next node 
+            curr = curr.next;   //   تعني  )i++(
+
+        }
+        if (counter2 == 0) {
+            System.out.println("Not Found");      //searhG
+        }
+    }
+
+    public void travers_Report2(LinkedList list) {   
+        Node pt = list.head;  // بدلالة الهيد   مؤشر 
+        System.out.println("LinkedList: ");
+        // Traverse through the LinkedList 
+        int counter3 = 0;
+        while (pt != null) {
+            if (pt.Stuspecialty == "Computer science") {
+                System.out.println(pt.StuFName + "*** " + pt.StuLastName + "*** " + pt.Stuspecialty + "*** " + pt.StuAddress
+                        + "*** " + pt.Stuid + "*** " + pt.StuLevel + "*** " + pt.StuAge + "*** " + pt.StuAvg);
+            }
+            counter3 = 1;
+
+            // Go to next node 
+            pt = pt.next;   //   تعني  )i++(
+        }
+    }
+
+    public void travers_Report3(LinkedList list) {
+        Node on = list.head;  // بدلالة الهيد   مؤشر 
+        System.out.println("LinkedList: ");
+        // Traverse through the LinkedList 
+        int counter4 = 0;
+        while (on != null) {
+            if (on.Uinvesity.equals("Alaqsa")) {
+                System.out.println(on.StuFName + "*** " + on.StuLastName + "*** " + on.Stuspecialty + "*** " + on.StuAddress
+                        + "*** " + on.Stuid + "*** " + on.StuLevel + "*** " + on.StuAge + "*** " + on.StuAvg + on.Uinvesity);
+            }
+            counter4 =1;
+
+            // Go to next node 
+            on = on.next;   //   تعني  )i++(
+        }
+    }
+
+//    public void travers_Report4(LinkedList list) {
+//        Node key = list.head;  // بدلالة الهيد   مؤشر 
+//        System.out.println("LinkedList: ");
+//        // Traverse through the LinkedList 
+//        int counter5 = 0;
+//        while (key != null) {
+//            if (key.StuLevel == 3) {
+//                System.out.println(key.StuFName + "*** " + key.StuLastName + "*** " + key.Stuspecialty + "*** " + key.StuAddress
+//                        + "*** " + key.Stuid + "*** " + key.StuLevel + "*** " + key.StuAge + "*** " + key.StuAvg);
+//            }
+//            counter5 = 1;
+//            // Go to next node 
+//            key = key.next;   //   تعني  )i++(
+//        }
+//    }
+//
+//    public static void bubble_sortStrings(String[] arr2, int n) { 
+//        String temp;
+// //      Sorting strings using bubble sort
+//        for (int j = 0; j < n - 1; j++) {
+//            for (int i = j + 1; i < n; i++) {
+//                if (arr2[j].compareTo(arr2[j+1]) > 0) {   //j+1 =i
+//                    temp = arr2[j];
+//                    arr2[j] = arr2[j+1];
+//                    arr2[j+1] = temp;
+//                }
+//            }
+//        }
+//    }
+
+    public void InsertionSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) { //value j > i  15 > 3
+                arr[j + 1] = arr[j];
+                j = j - 1; 
+            }
+            arr[j + 1] = key;
+
+        }
+
+    }
+
+    public static void pintSort(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static boolean LinearSearch(LinkedList list, int n, int item) {
+        Node k = list.head;
+        int co = 0;
+        for (int i = 0; i < n; i++) {
+            if (k.StuLevel == item) {
+                System.out.println("index :" + i);
+                return true;
+            }
+            co = 1;
+            // Go to next node 
+            k = k.next;
+        }
+        return false;
+    }
+ 
+    
+    public int size(LinkedList list) {
+        Node search = head;
+        int count = 0;
+        while (search.next != null) {
+            count++;
+            search = search.next;
+        }
+        return count;
+    }
+    public void BinarySearch(LinkedList list) {
+        Scanner ib = new Scanner(System.in);
+
+        int id = ib.nextInt(), co2 = 0;
+        System.out.println("***");
+        int left = 0;
+        int right = size(list) - 1;
+        int mid;
+        while (left <= right) {
+            Node search1 = list.head;
+            mid = (left + right) / 2;
+            int a = mid;
+            while (a > 0) {
+                search1 = search1.next;
+                a--;
+            }
+            if (id > search1.Stuid) {
+                left = mid + 1;
+            } else if (id < search1.Stuid) {
+                right = mid - 1;
+            } else {
+                System.out.print("name : " + search1.StuFName + " *** ");
+                System.out.print("last name : " + search1.StuLastName + " *** ");
+                System.out.print("address : " + search1.StuAddress + " *** ");
+
+                System.out.print("Id : " + search1.Stuid + " *** ");
+                System.out.print("Level : " + search1.StuLevel + " *** ");
+                System.out.print("Spec : " + search1.Stuspecialty + " *** ");
+                System.out.print("Age : " + search1.StuAge + " *** ");
+                System.out.println("Avg :" + search1.StuAge + " . ");
+                co2++;
+                break;
+            }
+        }
+        if (co2 == 0) {
+            System.out.println("This student does't exist!");
+        }
+
+    }
+
+    public void update(LinkedList list) {
+        Node ponteir = list.head;
+        while (ponteir != null) {   
+            if (ponteir.StuFName == "Ola") {
+                ponteir.StuFName = "Aloosh";
+            }
+
+            ponteir = ponteir.next;
+        }
+    }
+
+    public LinkedList delete(LinkedList list, int lev) {
+        if (list.head.StuLevel == lev) {
+            head = head.next;
+        } else {
+            Node curr = head;
+            Node prev = null;
+            while (curr != null && curr.StuLevel != lev) {
+                prev = curr;
+                curr = curr.next;
+            }
+            prev.next = curr.next;
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+ 
+
+//        //Menu ... 
+////1-linked list 20 = Student /     ** append **
+////2- Update information 
+////3- 3Shearhing Algorithem 
+////Using linear search 
+////Using binary search
+////Select other search 
+////+ 2 Sorting Algorithem 
+////Sorting using array of string 
+////Using bubble sort
+////Select sorting algorithm
+////4- Delete information 
+////5- Exit 
+////40807  40808   40809  40810   40811
+        Scanner input = new Scanner(System.in);
+        LinkedList list = new LinkedList();
+        list.append(list, "Ola", "Alostaz", "Applied Information Technology", "Dear- Albalah", 40807, 1, 19, 70.0 , "Alaqsa ");
+        list.append(list, "Amera", "Elmasrey", "Applied Information Technology", "Gaza", 40808, 2, 18, 60.0 , "Alazhar");
+        list.append(list, "samera", "Al-Shashtari", "Computer science", "Khan Younes", 40809, 3, 20, 80.0, " Alqdes");
+        list.append(list, "Shata", "Abedi", "Computer science", "Zawaida", 40810, 4, 21, 89.0,"Alaqsa");
+//        list.append(list, "Roba", "Brahimi", "Website Design", "Khan Younes", 40811, 5, 19, 85.0);
+//        list.append(list, "Alaa", "Al-Qudsi", "Website Design", "flower area", 40812, 6, 19, 82.0);
+//        list.append(list, "Nesma", "Nabulsi", "Graphic Design", "", 40813, 7, 19, 83.0);
+//        list.append(list, "Fatem", "yemeni", "Graphic Design", "Khan Younes", 40814, 9, 19, 73.0);
+//        list.append(list, "Rose", "Shaqqura", "Arabic Language", "Nuseirat", 40815, 8, 19, 70.0);
+//        list.append(list, "Yasser", "Brahimi", "Arabic Language", "Khan Younes", 40816, 7, 20, 85.0);
+//        list.append(list, "Ibrahem", "Shanti", "English Language", "flower area", 40817, 10, 19, 75.0);
+//        list.append(list, "Tareq", "Elbaz", "Graphic Design", "Zawaida", 40818, 11, 19, 88.0);
+//        list.append(list, "Mohammed", "Alyan", "English Language", "Nuseirat", 40819, 13, 19, 91.0);
+//        list.append(list, "Mosa", "Brahimi", "Website Design", "Zawaida", 40820, 12, 20, 67.0);
+//        list.append(list, "Yazn", "Shanti", "Applied Information Technology", "Nuseirat", 40821, 15, 18, 79.0);
+//        list.append(list, "Moshab", "Elmasrey", "Applied Information Technology", "Dair Al Balah", 40822, 21, 19, 90.0);
+//        list.append(list, "Yamen", "Alyan", "Applied Information Technology", "Gaza", 40823, 18, 18, 80.0);
+//        list.append(list, "Hassan", "Al Buhaisi", "Computer science", "Khan Younes", 40824, 37, 20, 80.0);
+//        list.append(list, "Mohammed", "Al Buhaisi", "Computer science", "Zawaida", 40825, 16, 20, 78.0);
+//        list.append(list, "Leana", "Al Buhaisi", "Website Design", "Khan Younes", 40826, 22, 19, 87.0);
+//        list.append(list, "Ahmad", "Al Buhaisi", "Website Design", "Khan Younes", 40826, 22, 19, 87.0);
+        boolean loop = true;
+        while (loop) {
+            System.out.println("*** Main Menu ***");
+            System.out.println("[1-] Append Students Information Using First Linked List  ");
+            System.out.println("[2-] Update Menu ");
+            System.out.println("[3-] Sort Menu ");
+            System.out.println("[4-] Search Menu   ");
+            System.out.println("[5-] Report  Menu   ");
+            System.out.println("[6-]  Delete  Menu  ");
+            System.out.println("[7-]Exit");
+
+            int n = 20;
+            int index = 1;
+            int Choice = input.nextInt();
+            switch (Choice) {
+                case 1:
+                    System.out.println("Append Process");
+
+                    list.travers_show(list);
+
+                    break;
+                case 2:
+                    list.update(list);
+                    list.travers_show(list);
+                    break;
+
+                case 3:
+                    // Sort
+
+                    boolean x = true;
+                    int c_oi = 0;
+                    while (x) {
+                        System.out.println("1- bubble Sort");
+                        System.out.println("2- Insertion Sort");
+                        System.out.println("3-Exit.");
+                        c_oi = input.nextInt();
+                        switch (c_oi) {
+                            case 1:
+                                String[] arr2 = {"Ola ", "Amera", "samera ", "Shata", "Roba", "Alaa",
+                                    "Nesma", "Rose", "Yasser", "Ibrahem", "Tareq", "Mohammed"};
+
+                                n = arr2.length;
+//                                bubble_sortStrings(arr2, n);
+                                System.out.println("Strings in sorted order are : ");
+                                for (int i = 0; i < n; i++) {
+                                    System.out.println("String " + (i + 1) + " is " + arr2[i]);
+                                }
+
+                                break;
+                            case 2:
+                                int arr[] = {19, 2, 5, 17, 12, 11, 22, 4, 1, 3, 7, 10, 33, 66, 100};
+                                list.InsertionSort(arr);
+
+                                pintSort(arr);
+                                break;
+                            case 3:
+                                x = false;
+                                break;
+                        }
+                    }
+                    break;
+
+                case 4: //search
+                    boolean Ex = true;
+                    int c_choi = 0;
+                    while (Ex) {
+                        System.out.println("1- Leinar Search");
+                        System.out.println("2- Binary Search");
+
+                        System.out.println("3-Exit.");
+                        c_choi = input.nextInt();
+
+                        switch (c_choi) {
+                            case 1:
+                                System.out.print("Enter search StudentLevel : ");
+                                int item = input.nextInt();
+                                boolean s = LinearSearch(list, n, item);
+                                System.out.println(s);
+                
+                                break;
+                            case 2:
+
+                                System.out.print("Enter search number:=");
+
+                                list.BinarySearch(list);
+
+//                          
+//                                Node head = null;
+//                                 head = push(list, head);
+//                                int id = input.nextInt();
+////                                   40818;
+//                                if (BinarySearch(list, head, id) == null) {
+//                                    System.out.println("Value not present");
+//                                } else
+//                                {
+//                              System.out.println(" present");
+//
+//                                }
+                                break;
+
+                            case 3:
+                                Ex = false;
+                                break;
+
+                        }
+                    }
+                    break;
+
+                case 5:
+                    //Report : traverse ^ _ ^ /  *-*
+                    boolean Exists = true;
+                    int c_choise = 0;
+                    while (Exists) {
+                        System.out.println("[1-] Looking for students who live in Gaza City");
+                        System.out.println("[2-] Find students who specialize in Computer science");
+                        System.out.println("[3-] Looking for students with GPA over 70");
+                        System.out.println("[4-] Find students who are level 3");
+                        System.out.println("[5-] Exit");
+                        System.out.println();
+                        System.out.print("What's Your Choice: ");
+                        c_choise = input.nextInt();
+
+                        if (c_choise == 1) {
+                            list.travers_Report1(list);
+                        } else if (c_choise == 2) {
+                            list.travers_Report2(list);
+                        } else if (c_choise == 3) {
+                            list.travers_Report3(list);
+                        } else if (c_choise == 4) {
+//                            list.travers_Report4(list);
+                        } else if (c_choise == 5) {
+                            Exists = false;
+                        }
+
+                    }
+                    break;
+
+                case 6:
+                    //Delete  
+                    list.travers_show(list);
+                    System.out.println("Delete Data For Level 2 Students");
+                    list.delete(list, 2);
+                    list.travers_show(list);
+                    break;
+
+                case 7:
+                    loop = false;
+
+                    break;
+            }
+        }
+
+    }
+
+}
+
