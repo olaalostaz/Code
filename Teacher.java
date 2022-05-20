@@ -1,7 +1,4 @@
 
-//Ola Alostaz  الاسم
-//2301202683 الرقم الجامعي :
-
 package school;
 
 public class Teacher extends Employee {
